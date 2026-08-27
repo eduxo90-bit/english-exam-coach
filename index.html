@@ -40,12 +40,8 @@ details{border-top:1px solid #ddd;padding:12px 0}a{color:var(--navy)}
 </nav>
 
 <section id="home" class="card">
-<h2>Tu sesión de mañana — 60 minutos</h2>
-<div class="grid">
-<div class="stat"><b>15 min</b><br>Grammar</div><div class="stat"><b>10 min</b><br>Vocabulary</div>
-<div class="stat"><b>15 min</b><br>Reading</div><div class="stat"><b>10 min</b><br>Writing</div>
-<div class="stat"><b>10 min</b><br>Errores + repaso</div>
-</div>
+<h2>🎯 Fase 1 — Preparación intensiva para el 9/9</h2>
+<div class="grid"><div class="stat"><b>20 min</b><br>Reading</div><div class="stat"><b>15 min</b><br>Grammar</div><div class="stat"><b>10 min</b><br>Vocabulary</div><div class="stat"><b>10 min</b><br>Writing</div><div class="stat"><b>5 min</b><br>Errores</div></div>
 <h3>Prioridad hasta el 9/9</h3>
 <p><b>1.</b> Dominar el tipo de preguntas del Reading. <b>2.</b> Aprender una estructura sólida para Writing. <b>3.</b> Ampliar vocabulario y gramática. <b>4.</b> Hacer simulacros.</p>
 <div class="progress"><div id="pbar" class="bar"></div></div><p id="ptext" class="small">Progreso de la sesión: 0%</p>
@@ -53,18 +49,18 @@ details{border-top:1px solid #ddd;padding:12px 0}a{color:var(--navy)}
 </section>
 
 <section id="exam" class="card hidden">
-<h2>🚨 Modo EXAMEN</h2>
+<h2>🚨 Modo EXAMEN — Fase 1</h2>
 <p>El modelo reproduce la estructura del documento que me pasaste: <b>Reading 45 minutos</b> y <b>Writing 45 minutos</b>. El Reading incluye preguntas de opción múltiple, Yes/No, True/False, títulos, respuestas numéricas, puntuación/capitalización y respuestas abiertas. El Writing exige <b>250–300 palabras</b>.</p>
 <p class="small">Fuente: CATE 1 2025 Question Sheet + artículo Academic Article about Deforestation.</p>
 <div class="grid"><div class="stat"><b>READING</b><br>45 min · 12 tareas</div><div class="stat"><b>WRITING</b><br>45 min · elegir 1 tarea</div></div>
-<button class="primary" onclick="show('reading',document.querySelectorAll('nav button')[2])">🚀 Simular Reading</button>
-<button class="primary" onclick="show('writing',document.querySelectorAll('nav button')[3])">✍️ Simular Writing</button>
+<button class="primary" onclick="startExamReading()">🚀 Simular Reading 45 min</button>
+<button class="primary" onclick="startExamWriting()">✍️ Simular Writing 45 min</button>
 </section>
 
 <section id="reading" class="card hidden">
-<h2>📖 Reading — Deforestation</h2>
+<h2>📖 Reading Lab</h2><p><span class="badge">Referencia PDF</span><span class="badge">Práctica adicional</span></p>
 <div id="rtimer" class="timer">45:00</div>
-<p class="small">En el examen real, las respuestas deben salir de los párrafos indicados del artículo.</p>
+<p class="small">Primero practicamos con el texto de referencia y después añadiremos textos nuevos para evitar memorizar respuestas.</p>
 <div class="card"><h3>Texto base</h3><p id="article"></p></div>
 <div id="rquiz"></div>
 <button class="primary" onclick="gradeReading()">Corregir Reading</button>
@@ -72,12 +68,12 @@ details{border-top:1px solid #ddd;padding:12px 0}a{color:var(--navy)}
 </section>
 
 <section id="writing" class="card hidden">
-<h2>✍️ Writing — 45 minutos</h2>
+<h2>✍️ Writing Lab — 45 minutos</h2>
 <div id="wtimer" class="timer">45:00</div>
 <p><span class="badge">250–300 words</span><span class="badge">Introduction</span><span class="badge">Development</span><span class="badge">Conclusion</span></p>
 <div id="taskBox" class="card"></div>
 <button onclick="setTask(1)">Task 1 · Environment</button>
-<button onclick="setTask(2)">Task 2 · Social Media</button>
+<button onclick="setTask(2)">Task 2 · Social Media</button><button onclick="setTask(3)">Task 3 · Education</button>
 <p id="wc">Words: 0</p>
 <textarea id="essay" oninput="countWords()" placeholder="Write your answer in English..."></textarea>
 <h3>Checklist antes de entregar</h3>
@@ -105,8 +101,8 @@ details{border-top:1px solid #ddd;padding:12px 0}a{color:var(--navy)}
 </section>
 
 <section id="plan" class="card hidden">
-<h2>📅 Plan hasta el examen</h2>
-<div class="grid">
+<h2>📅 Plan de 13 días</h2>
+<div class="grid"><div class="stat"><b>Días 1–3</b><br>Formato, Reading PDF y Writing Environment.</div><div class="stat"><b>Días 4–6</b><br>Grammar + Reading nuevo + Social Media.</div><div class="stat"><b>Días 7–9</b><br>Mini-simulacro + conditionals/passive + vocabulary.</div><div class="stat"><b>Días 10–13</b><br>Writing, simulacro, errores y repaso final.</div><div class="stat"><b>Regla</b><br>1 hora diaria. Calidad antes que cantidad.</div>
 <div class="stat"><b>Bloque 1</b><br>Reading: preguntas del modelo + localizar evidencia.</div>
 <div class="stat"><b>Bloque 2</b><br>Grammar: tiempos, artículos, preposiciones, modales, comparativos y conectores.</div>
 <div class="stat"><b>Bloque 3</b><br>Writing: 250–300 palabras, estructura y corrección.</div>
@@ -184,7 +180,8 @@ vlist.innerHTML=vocab.map((v,i)=>'<div class="question"><b>'+(i+1)+'. '+v[0]+'</
 
 const tasks={
 1:"<b>TASK 1 — Environmental challenges in my part of the world</b><p>Explain the environmental pollution and degradation issues in an area of the country you know. Explain the causes of these problems and suggest possible solutions. Develop each issue with causes and solutions.</p>",
-2:"<b>TASK 2 — An introduction to Social Media Use</b><p>Write an informative piece for new social media users. Explain what social media is, platforms, advantages and disadvantages. Explain your personal use and any security problems or threats, with personal examples. Finally, suggest rules or guidelines for users.</p>"
+2:"<b>TASK 2 — An introduction to Social Media Use</b><p>Write an informative piece for new social media users. Explain what social media is, platforms, advantages and disadvantages. Explain your personal use and any security problems or threats, with personal examples. Finally, suggest rules or guidelines for users.</p>",
+3:"<b>TASK 3 — Education and lifelong learning</b><p>Write an informative piece explaining why lifelong learning is important today. Discuss benefits, difficulties, examples and practical advice for someone starting to learn a new skill.</p>"
 };
 function setTask(n){taskBox.innerHTML=tasks[n];essay.value='';countWords()}
 setTask(1);
