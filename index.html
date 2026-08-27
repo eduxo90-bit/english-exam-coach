@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English Exam Coach — 9 September</title>
+<style>
+body{font-family:Arial;margin:0;background:#f3f6f8;color:#17202a}header{background:#17324d;color:white;padding:24px}main{max-width:950px;margin:auto;padding:18px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}button{border:0;border-radius:10px;padding:11px 14px;margin:4px;cursor:pointer;background:#e7edf2}button.active,.primary{background:#17324d;color:white}
+.card{background:white;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 12px #0001}.hidden{display:none}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.question{border-top:1px solid #ddd;padding:15px 0}.option{display:block;width:100%;text-align:left}.correct{background:#d9f5df}.wrong{background:#ffdede}
+.timer{text-align:center;font-size:2rem;font-weight:bold;padding:12px;background:#edf5f5;border-radius:12px}textarea{width:100%;min-height:250px;padding:12px;box-sizing:border-box;border:1px solid #ccd5df;border-radius:10px;font:16px Arial}.small{color:#667085}
+</style></head><body>
+<header><h1>🇬🇧 English Exam Coach</h1><div>Preparación intensiva · examen 9 septiembre 2026</div></header>
+<main>
+<nav><button class="active" onclick="show('home',this)">🏠 Inicio</button><button onclick="show('reading',this)">📖 Reading</button><button onclick="show('writing',this)">✍️ Writing</button><button onclick="show('vocab',this)">🧠 Vocabulary</button><button onclick="show('plan',this)">📅 Plan</button></nav>
+<section id="home" class="card"><h2>🎯 Tu entrenamiento</h2><p><b>Reading:</b> 45 min · <b>Writing:</b> 45 min · Vocabulary + errores.</p><div class="grid"><div><b>📖 Reading</b><br>Formato basado en tu modelo.</div><div><b>✍️ Writing</b><br>250–300 palabras.</div><div><b>🧠 Vocabulary</b><br>Environment y temas relacionados.</div><div><b>🔄 Review</b><br>Repasa tus fallos.</div></div><br><button class="primary" onclick="document.querySelectorAll('nav button')[1].click()">Empezar Reading</button></section>
+<section id="reading" class="card hidden"><h2>📖 Reading — práctica tipo examen</h2><div id="timer" class="timer">45:00</div><p class="small">Tu modelo usa 45 minutos y combina elección múltiple, Yes/No, True/False, títulos, números, puntuación/capitalización y respuestas abiertas. fileciteturn9file4turn9file5</p><div id="quiz"></div><button class="primary" onclick="finishQuiz()">Corregir Reading</button><div id="result"></div></section>
+<section id="writing" class="card hidden"><h2>✍️ Writing — 45 minutos</h2><div id="wtimer" class="timer">45:00</div><p><b>Objetivo: 250–300 words.</b></p><button onclick="task(1)">Task 1 — Environment</button><button onclick="task(2)">Task 2 — Social Media</button><button onclick="task(3)">Task 3 — Technology</button><p id="taskText"><b>Task 1:</b> Environmental challenges in my part of the world. Explain problems, causes and possible solutions, with personal examples.</p><p id="count">Words: 0</p><textarea id="essay" oninput="countWords()" placeholder="Write your essay here..."></textarea><br><button class="primary" onclick="saveEssay()">Guardar</button><span id="saved" class="small"></span></section>
+<section id="vocab" class="card hidden"><h2>🧠 Vocabulary</h2><div id="vocabList"></div></section>
+<section id="plan" class="card hidden"><h2>📅 Plan</h2><div class="grid"><div><b>Reading</b><p>Un tipo de pregunta cada día + simulacros.</p></div><div><b>Writing</b><p>250–300 palabras, conectores, causas, soluciones y ejemplos.</p></div><div><b>Grammar</b><p>Repasa tus errores de tiempos, preposiciones, artículos y conectores.</p></div><div><b>Vocabulary</b><p>Environment, society, technology, work, education y social media.</p></div></div><p>Para práctica adicional: <a href="https://learnenglish.britishcouncil.org/free-resources/reading" target="_blank">British Council Reading</a> · <a href="https://learnenglish.britishcouncil.org/free-resources/writing" target="_blank">British Council Writing</a> · <a href="https://www.cambridgeenglish.org/learning-english/activities-for-learners/" target="_blank">Cambridge English</a>.</p></section>
+</main>
+<script>
+const qs=[
+["When has most deforestation occurred?",["During the last 10,000 years","The last half decade","Over the next 50 years","In recent years"],0,"The article says most of the loss has occurred in the last 50 years."],
+["Which is mentioned as a cause of deforestation?",["Commercial agriculture","Fishing","Tourism","Sport"],0,"Agriculture is one of the main drivers."],
+["Subsistence farming accounts for approximately what percentage?",["32%","40%","48%","68%"],2,"The article states 48%."],
+["Desertification is the process by which...",["forests grow","fertile land becomes desert","cities expand","rainfall increases"],1,"That is the definition given in the article."],
+["Drylands occupy about what percentage of the world's land area?",["20%","30%","40%","60%"],2,"About 40%."],
+["How many species are estimated to be lost every day?",["50","100","137","500"],2,"Around 137 plant, animal and insect species."],
+["Deforestation is directly responsible for around what percentage of greenhouse gas emissions?",["5%","10%","20%","50%"],2,"Around 20%."],
+["True or False: Deforestation only affects local climate.",["True","False"],1,"The article discusses local and global effects."],
+["How far can the Sahara expand south per year?",["4.8 km","48 km","480 km","1,480 km"],1,"Up to 48 kilometres per year."],
+["What is an indirect way deforestation increases atmospheric CO2?",["It reduces CO2 uptake by plants","It increases rainfall","It increases biodiversity","It stops farming"],0,"Fewer trees means less CO2 uptake."],
+["True or False: Modern agriculture relies on a limited number of crops.",["True","False"],0,"The article says modern agriculture is dependent on a limited number of crops."],
+["What is one major consequence of losing biodiversity?",["More genetic diversity","Loss of potential medicines and crop resilience","More forests","Less climate change"],1,"The article links biodiversity loss to medicine and agriculture."]
+];
+let answers=Array(qs.length).fill(null);
+function render(){quiz.innerHTML=qs.map((x,i)=>`<div class="question"><b>${i+1}. ${x[0]}</b>${x[1].map((o,j)=>`<button class="option" onclick="pick(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}<div id="e${i}" class="small"></div></div>`).join('')}
+function pick(i,j,b){answers[i]=j;document.querySelectorAll('.question')[i].querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add('correct')}
+function finishQuiz(){let s=0;qs.forEach((q,i)=>{let bs=document.querySelectorAll('.question')[i].querySelectorAll('button');bs.forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('correct');if(answers[i]===j&&j!==q[2])b.classList.add('wrong')});if(answers[i]===q[2])s++;document.getElementById('e'+i).textContent=answers[i]===q[2]?'Correct. '+q[3]:'Review. '+q[3]});result.innerHTML=`<div class="card"><h3>Resultado: ${s}/${qs.length}</h3><p>${s>=10?'Muy bien. Ahora céntrate en Writing.':s>=7?'Buen nivel. Repasa los errores y repite.':'Vamos a reforzar Reading y vocabulario.'}</p></div>`}
+const vocab=[["deforestation","deforestación"],["soil erosion","erosión del suelo"],["desertification","desertificación"],["biodiversity","biodiversidad"],["greenhouse gas emissions","emisiones de gases de efecto invernadero"],["reforestation","reforestación"],["depleted","agotado / empobrecido"],["resilience","resiliencia"],["to tackle","abordar / hacer frente a"],["consequences","consecuencias"]];
+vocabList.innerHTML=vocab.map((v,i)=>`<div class="question"><b>${i+1}. ${v[0]}</b> — ${v[1]}</div>`).join('');
+function show(id,b){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function task(n){taskText.innerHTML=n===1?'<b>Task 1:</b> Environmental challenges in my part of the world. Explain problems, causes and possible solutions, with personal examples.':n===2?'<b>Task 2:</b> An introduction to Social Media Use. Explain advantages, disadvantages, your personal use, security risks and rules for users.':'<b>Task 3:</b> Technology and everyday life. Explain benefits, disadvantages and ways to use technology responsibly.'}
+function countWords(){count.textContent='Words: '+essay.value.trim().split(/\s+/).filter(Boolean).length}
+function saveEssay(){localStorage.setItem('englishEssay',essay.value);saved.textContent=' ✓ Guardado en este dispositivo.'}
+function timer(id){let end=Date.now()+45*60000;setInterval(()=>{let s=Math.max(0,Math.floor((end-Date.now())/1000)),m=Math.floor(s/60),r=s%60;document.getElementById(id).textContent=String(m).padStart(2,'0')+':'+String(r).padStart(2,'0')},1000)}
+render();timer('timer');timer('wtimer');
+</script></body></html>
