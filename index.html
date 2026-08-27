@@ -16,7 +16,7 @@ button.active,.primary{background:var(--navy);color:#fff}
 .hidden{display:none}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .stat{background:#eef5f5;border-radius:12px;padding:15px}
 .timer{font-size:2rem;text-align:center;font-weight:bold;padding:12px;background:#edf5f5;border-radius:12px}
-.question{border-top:1px solid #ddd;padding:15px 0}.option{display:block;width:100%;text-align:left;background:#f7f8fa}
+.question{border-top:1px solid #ddd;padding:15px 0}.option{display:block;width:100%;text-align:left;background:#f7f8fa}.goption{display:inline-block;text-align:left;background:#f7f8fa;margin:4px;padding:10px 13px;border-radius:10px;border:0;cursor:pointer}
 .correct{background:var(--ok)!important}.wrong{background:var(--bad)!important}
 .small{color:var(--muted);font-size:.9rem}.badge{display:inline-block;background:#e9eef3;padding:5px 9px;border-radius:20px;margin:3px}
 textarea{width:100%;min-height:260px;padding:12px;border:1px solid #ccd5df;border-radius:10px;font:16px Arial}
@@ -170,8 +170,9 @@ const grammar=[
 ["If I _____ more time, I would study every day.",["had","have","will have"],0],
 ["By next year, I _____ English for several years.",["will have studied","study","studied"],0]
 ];
-gquiz.innerHTML=grammar.map((q,i)=>'<div class="question"><b>'+(i+1)+'. '+q[0]+'</b>'+q[1].map((o,j)=>'<button onclick="this.parentNode.dataset.a='+j+'">'+o+'</button>').join('')+'</div>').join('');
-function gradeGrammar(){let s=0;document.querySelectorAll('#gquiz .question').forEach((d,i)=>{if(Number(d.dataset.a)===grammar[i][2])s++});localStorage.setItem('grammarScore',s+'/'+grammar.length);gresult.innerHTML='<div class="card"><h3>'+s+'/'+grammar.length+'</h3><p>'+ (s>=8?'Muy bien.':'Repasa los fallos y vuelve a intentarlo.')+'</p></div>';updateMistakes()}
+gquiz.innerHTML=grammar.map((q,i)=>'<div class="question"><b>'+(i+1)+'. '+q[0]+'</b><div>'+q[1].map((o,j)=>'<button type="button" class="goption" data-i="'+i+'" data-j="'+j+'" onclick="pickGrammar(this)">'+o+'</button>').join('')+'</div></div>').join('');
+function pickGrammar(btn){const i=Number(btn.dataset.i);const q=document.querySelectorAll('#gquiz .question')[i];q.querySelectorAll('.goption').forEach(x=>x.classList.remove('correct','wrong'));q.dataset.a=btn.dataset.j;btn.classList.add('correct')}
+function gradeGrammar(){let s=0;document.querySelectorAll('#gquiz .question').forEach((d,i)=>{const a=Number(d.dataset.a);const buttons=d.querySelectorAll('.goption');buttons.forEach((b,j)=>{b.disabled=true;if(j===grammar[i][2])b.classList.add('correct');if(j===a&&j!==grammar[i][2])b.classList.add('wrong')});if(a===grammar[i][2])s++});localStorage.setItem('grammarScore',s+'/'+grammar.length);gresult.innerHTML='<div class="card"><h3>'+s+'/'+grammar.length+'</h3><p>'+ (s>=8?'Muy bien.':'Repasa los fallos y vuelve a intentarlo.')+'</p></div>';updateMistakes()}
 
 const vocab=[
 ["deforestation","deforestación"],["biodiversity","biodiversidad"],["soil erosion","erosión del suelo"],["greenhouse gas emissions","emisiones de gases de efecto invernadero"],["habitat","hábitat"],["reforestation","reforestación"],["land management","gestión del territorio"],["depleted soil","suelo empobrecido"],["subsistence farming","agricultura de subsistencia"],["livestock","ganado"],["desertification","desertificación"],["resilience","resiliencia"],["to tackle","abordar"],["to reduce","reducir"],["threat","amenaza"],["reliable","fiable"],["evidence","evidencia"],["however","sin embargo"],["therefore","por lo tanto"],["in addition","además"]
