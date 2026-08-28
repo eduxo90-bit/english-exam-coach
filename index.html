@@ -3,197 +3,242 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>English Coach — Exam 9 September</title>
+<title>English Coach — Fase 1</title>
 <style>
-:root{--navy:#17324d;--teal:#287d79;--bg:#f3f6f8;--ink:#17202a;--muted:#667085;--ok:#d8f3df;--bad:#ffdede}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:var(--navy);color:#fff;padding:22px}header h1{margin:0 0 5px}
-main{max-width:1100px;margin:auto;padding:16px}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-button{border:0;border-radius:10px;padding:10px 13px;margin:3px;cursor:pointer;background:#e5ebf0;color:var(--ink)}
-button.active,.primary{background:var(--navy);color:#fff}
-.card{background:#fff;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 12px #0001}
-.hidden{display:none}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
-.stat{background:#eef5f5;border-radius:12px;padding:15px}
-.timer{font-size:2rem;text-align:center;font-weight:bold;padding:12px;background:#edf5f5;border-radius:12px}
-.question{border-top:1px solid #ddd;padding:15px 0}.option{display:block;width:100%;text-align:left;background:#f7f8fa}.goption{display:inline-block;text-align:left;background:#f7f8fa;margin:4px;padding:10px 13px;border-radius:10px;border:0;cursor:pointer}
-.correct{background:var(--ok)!important}.wrong{background:var(--bad)!important}
-.small{color:var(--muted);font-size:.9rem}.badge{display:inline-block;background:#e9eef3;padding:5px 9px;border-radius:20px;margin:3px}
-textarea{width:100%;min-height:260px;padding:12px;border:1px solid #ccd5df;border-radius:10px;font:16px Arial}
-input{padding:10px;border:1px solid #ccd5df;border-radius:8px;width:100%}
-details{border-top:1px solid #ddd;padding:12px 0}a{color:var(--navy)}
-.progress{height:10px;background:#e5ebf0;border-radius:10px;overflow:hidden}.bar{height:100%;width:0;background:var(--teal)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#17202a}
+header{background:#17324d;color:white;padding:20px}main{max-width:1000px;margin:auto;padding:15px}
+nav{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:15px}button{border:0;border-radius:9px;padding:10px 13px;margin:3px;cursor:pointer;background:#e5ebf0;font-size:15px}
+button:hover{filter:brightness(.97)}button.selected{outline:3px solid #17324d;background:#dce7ef}
+button.correct{background:#ccefd5!important;outline:none}button.wrong{background:#ffd2d2!important;outline:none}
+.primary{background:#17324d;color:white}.card{background:white;border-radius:15px;padding:18px;margin:12px 0;box-shadow:0 2px 10px #0001}
+.hidden{display:none}.question{border-top:1px solid #ddd;padding:15px 0}.answer{display:block;width:100%;text-align:left}
+.timer{font-size:30px;text-align:center;font-weight:bold;background:#edf5f5;padding:12px;border-radius:10px}
+textarea{width:100%;min-height:270px;padding:12px;border:1px solid #ccd5df;border-radius:9px;font:16px Arial}
+.small{color:#667085}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.stat{background:#eef5f5;padding:14px;border-radius:10px}a{color:#17324d}
 </style>
 </head>
 <body>
-<header><h1>🇬🇧 English Coach</h1><div>A2 → C1 · 1 hora diaria · EXAMEN 9 SEPTIEMBRE 2026</div></header>
+<header><h1>🇬🇧 English Coach</h1><div>FASE 1 · Examen 9 septiembre · A2 → B2</div></header>
 <main>
 <nav>
-<button class="active" onclick="show('home',this)">🏠 Hoy</button>
-<button onclick="show('exam',this)">🚨 Examen 9/9</button>
-<button onclick="show('reading',this)">📖 Reading</button>
-<button onclick="show('writing',this)">✍️ Writing</button>
-<button onclick="show('grammar',this)">🔤 Grammar</button>
-<button onclick="show('vocab',this)">🧠 Vocabulary</button>
-<button onclick="show('mistakes',this)">❌ Errores</button>
-<button onclick="show('plan',this)">📅 Plan</button>
+<button class="primary" onclick="openPage('home',this)">🏠 Inicio</button>
+<button onclick="openPage('exam',this)">🚨 Examen</button>
+<button onclick="openPage('reading',this)">📖 Reading</button>
+<button onclick="openPage('grammar',this)">🔤 Grammar</button>
+<button onclick="openPage('vocab',this)">🧠 Vocabulary</button>
+<button onclick="openPage('writing',this)">✍️ Writing</button>
+<button onclick="openPage('errors',this)">❌ Errores</button>
 </nav>
 
 <section id="home" class="card">
-<h2>🎯 Fase 1 — Preparación intensiva para el 9/9</h2>
-<div class="grid"><div class="stat"><b>20 min</b><br>Reading</div><div class="stat"><b>15 min</b><br>Grammar</div><div class="stat"><b>10 min</b><br>Vocabulary</div><div class="stat"><b>10 min</b><br>Writing</div><div class="stat"><b>5 min</b><br>Errores</div></div>
-<h3>Prioridad hasta el 9/9</h3>
-<p><b>1.</b> Dominar el tipo de preguntas del Reading. <b>2.</b> Aprender una estructura sólida para Writing. <b>3.</b> Ampliar vocabulario y gramática. <b>4.</b> Hacer simulacros.</p>
-<div class="progress"><div id="pbar" class="bar"></div></div><p id="ptext" class="small">Progreso de la sesión: 0%</p>
-<button class="primary" onclick="startToday()">▶ Empezar sesión de 60 min</button>
+<h2>Sesión de mañana — 60 minutos</h2>
+<div class="grid">
+<div class="stat"><b>15 min</b><br>Grammar</div><div class="stat"><b>10 min</b><br>Vocabulary</div>
+<div class="stat"><b>20 min</b><br>Reading</div><div class="stat"><b>10 min</b><br>Writing</div>
+<div class="stat"><b>5 min</b><br>Errores</div>
+</div>
+<p><b>Regla:</b> no memorices respuestas. Aprende por qué una respuesta es correcta.</p>
+<button class="primary" onclick="openPage('grammar',document.querySelectorAll('nav button')[3])">▶ Empezar</button>
 </section>
 
 <section id="exam" class="card hidden">
-<h2>🚨 Modo EXAMEN — Fase 1</h2>
-<p>El modelo reproduce la estructura del documento que me pasaste: <b>Reading 45 minutos</b> y <b>Writing 45 minutos</b>. El Reading incluye preguntas de opción múltiple, Yes/No, True/False, títulos, respuestas numéricas, puntuación/capitalización y respuestas abiertas. El Writing exige <b>250–300 palabras</b>.</p>
-<p class="small">Fuente: CATE 1 2025 Question Sheet + artículo Academic Article about Deforestation.</p>
-<div class="grid"><div class="stat"><b>READING</b><br>45 min · 12 tareas</div><div class="stat"><b>WRITING</b><br>45 min · elegir 1 tarea</div></div>
-<button class="primary" onclick="startExamReading()">🚀 Simular Reading 45 min</button>
-<button class="primary" onclick="startExamWriting()">✍️ Simular Writing 45 min</button>
+<h2>🚨 Modo examen</h2>
+<p><b>Reading:</b> 45 minutos. <b>Writing:</b> 45 minutos y 250–300 palabras.</p>
+<p>El Reading reproduce el estilo del modelo CATE que estamos usando como referencia: selección múltiple, True/False, títulos y preguntas sobre datos del texto.</p>
+<button class="primary" onclick="openPage('reading',document.querySelectorAll('nav button')[2])">Empezar Reading</button>
+<button class="primary" onclick="openPage('writing',document.querySelectorAll('nav button')[5])">Empezar Writing</button>
 </section>
 
 <section id="reading" class="card hidden">
-<h2>📖 Reading Lab</h2><p><span class="badge">Referencia PDF</span><span class="badge">Práctica adicional</span></p>
-<div id="rtimer" class="timer">45:00</div>
-<p class="small">Primero practicamos con el texto de referencia y después añadiremos textos nuevos para evitar memorizar respuestas.</p>
-<div class="card"><h3>Texto base</h3><p id="article"></p></div>
-<div id="rquiz"></div>
+<h2>📖 Reading — Deforestation</h2>
+<div id="readTimer" class="timer">45:00</div>
+<div class="card"><p id="article"></p></div>
+<div id="readingQuestions"></div>
 <button class="primary" onclick="gradeReading()">Corregir Reading</button>
-<div id="rresult"></div>
-</section>
-
-<section id="writing" class="card hidden">
-<h2>✍️ Writing Lab — 45 minutos</h2>
-<div id="wtimer" class="timer">45:00</div>
-<p><span class="badge">250–300 words</span><span class="badge">Introduction</span><span class="badge">Development</span><span class="badge">Conclusion</span></p>
-<div id="taskBox" class="card"></div>
-<button onclick="setTask(1)">Task 1 · Environment</button>
-<button onclick="setTask(2)">Task 2 · Social Media</button><button onclick="setTask(3)">Task 3 · Education</button>
-<p id="wc">Words: 0</p>
-<textarea id="essay" oninput="countWords()" placeholder="Write your answer in English..."></textarea>
-<h3>Checklist antes de entregar</h3>
-<ul><li>250–300 words</li><li>Clear introduction</li><li>Each point developed with an example</li><li>Connectors</li><li>Verb tenses checked</li><li>Spelling + punctuation</li><li>Clear conclusion</li></ul>
-<button class="primary" onclick="saveEssay()">💾 Guardar Writing</button> <span id="saved" class="small"></span>
+<div id="readingResult"></div>
 </section>
 
 <section id="grammar" class="card hidden">
-<h2>🔤 Grammar — A2 → B1/B2</h2>
-<p>Hazlo sin mirar las respuestas. Después revisamos tus fallos.</p>
-<div id="gquiz"></div><button class="primary" onclick="gradeGrammar()">Corregir Grammar</button><div id="gresult"></div>
+<h2>🔤 Grammar</h2>
+<p>Haz clic en una respuesta. Puedes cambiarla antes de corregir.</p>
+<div id="grammarQuestions"></div>
+<button class="primary" onclick="gradeGrammar()">Corregir Grammar</button>
+<div id="grammarResult"></div>
 </section>
 
 <section id="vocab" class="card hidden">
-<h2>🧠 Vocabulary — Environment + Academic English</h2>
-<p>Para cada palabra: lee → di una frase → escribe una frase propia.</p>
-<div id="vlist"></div>
+<h2>🧠 Vocabulary</h2>
+<p>Lee la palabra, su significado y crea una frase propia.</p>
+<div id="vocabList"></div>
 </section>
 
-<section id="mistakes" class="card hidden">
-<h2>❌ Cuaderno de errores</h2>
-<p>La aplicación guarda aquí tus últimos resultados en este dispositivo.</p>
-<div id="mistakeBox"></div>
-<button onclick="clearData()">Borrar datos guardados</button>
+<section id="writing" class="card hidden">
+<h2>✍️ Writing</h2>
+<div id="writeTimer" class="timer">45:00</div>
+<button onclick="chooseWriting(1)">Environment</button>
+<button onclick="chooseWriting(2)">Social Media</button>
+<div id="writingTask" class="card"></div>
+<p id="wordCount">Words: 0</p>
+<textarea id="essay" placeholder="Write your answer in English..." oninput="countWords()"></textarea>
+<p><b>Checklist:</b> 250–300 words · introduction · development · examples · connectors · conclusion · spelling.</p>
+<button class="primary" onclick="saveWriting()">💾 Guardar</button>
+<span id="saveMessage" class="small"></span>
 </section>
 
-<section id="plan" class="card hidden">
-<h2>📅 Plan de 13 días</h2>
-<div class="grid"><div class="stat"><b>Días 1–3</b><br>Formato, Reading PDF y Writing Environment.</div><div class="stat"><b>Días 4–6</b><br>Grammar + Reading nuevo + Social Media.</div><div class="stat"><b>Días 7–9</b><br>Mini-simulacro + conditionals/passive + vocabulary.</div><div class="stat"><b>Días 10–13</b><br>Writing, simulacro, errores y repaso final.</div><div class="stat"><b>Regla</b><br>1 hora diaria. Calidad antes que cantidad.</div>
-<div class="stat"><b>Bloque 1</b><br>Reading: preguntas del modelo + localizar evidencia.</div>
-<div class="stat"><b>Bloque 2</b><br>Grammar: tiempos, artículos, preposiciones, modales, comparativos y conectores.</div>
-<div class="stat"><b>Bloque 3</b><br>Writing: 250–300 palabras, estructura y corrección.</div>
-<div class="stat"><b>Bloque 4</b><br>Vocabulary + expresiones reutilizables sin memorizar textos.</div>
-<div class="stat"><b>Bloque 5</b><br>Simulacro completo y revisión de errores.</div>
-</div>
-<h3>Material adicional</h3>
-<p>No nos quedaremos solo con el PDF. Puedes ampliar Reading, Writing y Grammar con <a href="https://learnenglish.britishcouncil.org/free-resources/reading" target="_blank">British Council Reading</a>, <a href="https://learnenglish.britishcouncil.org/free-resources/writing" target="_blank">Writing</a> y <a href="https://learnenglish.britishcouncil.org/free-resources/grammar" target="_blank">Grammar</a>, y practicar actividades de <a href="https://www.cambridgeenglish.org/learning-english/activities-for-learners/" target="_blank">Cambridge English</a>.</p>
+<section id="errors" class="card hidden">
+<h2>❌ Mis resultados</h2>
+<div id="scores"></div>
+<button onclick="clearScores()">Borrar resultados</button>
 </section>
 </main>
 
 <script>
-const article=`Over half the world’s forests have been destroyed in the last 10,000 or so years. The majority of this loss has occurred in just the last 50 years. This has occurred simultaneously with a massive increase in the world’s human population. The scale of this loss has led to significant changes throughout many parts of the world, including large-scale extinction events, desertification, climatic changes, topsoil loss, flooding, famine, disease outbreaks and insect plagues.
+const article = `Over half of the world's forests have been destroyed in the last 10,000 or so years. The majority of this loss has occurred in just the last 50 years. This has occurred simultaneously with a massive increase in the world's human population. The scale of this loss has led to significant changes throughout many parts of the world, including large-scale extinction events, desertification, climatic changes, topsoil loss, flooding, famine, disease outbreaks and insect plagues.
 
 Deforestation occurs primarily as a result of agriculture, fuel use and production, timber harvesting, pasture-clearing for livestock and expanding human settlements. Large-scale war has also contributed. Deforested areas can become wastelands through soil erosion and desertification if they are not reforested.
 
-The world’s annual rate of deforestation is estimated at about 13.7 million hectares a year. Roughly half of deforested areas get reforested to some degree, but new-growth forests do not function in the same way as old forests and do not support the same biodiversity.
+The world's annual rate of deforestation is estimated at about 13.7 million hectares a year. Roughly half of deforested areas get reforested to some degree, but new-growth forests do not function in the same way as old forests and do not support the same biodiversity.
 
-Agriculture is one of the primary drivers of deforestation. Old-growth forests have largely been cut and burned because of agriculture. When forests are replaced, fast-growing plants may be used commercially; if land is abandoned, weeds may be the only plants able to grow on depleted soil. Subsistence farming accounts for 48% of deforestation and commercial agriculture for a further 32%.
-
-Even efficient agricultural systems can lead to nutrient loss unless supplemented with fertilizer. Nutrient loss and soil erosion contribute to desertification in the long term.
+Agriculture is one of the primary drivers of deforestation. Old-growth forests have largely been cut and burned because of agriculture. Subsistence farming accounts for 48% of deforestation and commercial agriculture for a further 32%.
 
 Growing and expanding populations are often a driver of deforestation. Increased population density creates dependence on agriculture and expansion into forest land. Increased urbanization also brings problems such as air and water pollution.
 
-Large populations can use up nearby resources and become dependent on expansion. Western Europe experienced significant deforestation from around 1100 to 1500 as its population expanded and industries used forest resources.
+Desertification is the process by which fertile land is transformed into desert, usually as a result of deforestation, drought and agricultural practices. Drylands currently occupy about 40% of the world's land area, and the Sahara is expanding south at up to 48 kilometres per year.
 
-Desertification is the process by which fertile land is transformed into desert, usually as a result of deforestation, drought and agricultural practices. It contributed to the collapse of several civilizations. Drylands currently occupy about 40% of the world’s land area, and the Sahara is expanding south at up to 48 kilometres per year.
-
-Deforestation has caused many species extinctions and loss of genetic diversity. This has implications for medicine and agriculture. The world is estimated to lose around 137 plant, animal and insect species every day as a result of rainforest deforestation. Deforestation affects both local and global climate and is estimated to be directly responsible for around 20% of global greenhouse gas emissions.`;
-
+Deforestation has caused many species extinctions and loss of genetic diversity. The world is estimated to lose around 137 plant, animal and insect species every day as a result of rainforest deforestation. Deforestation affects both local and global climate and is estimated to be directly responsible for around 20% of global greenhouse gas emissions.`;
 document.getElementById('article').textContent=article;
 
-const rq=[
-["1. When has most deforestation occurred?",["During the last 10,000 years","During the last 50 years","Over the next 50 years","Only in prehistory"],1],
-["2. Which is NOT a consequence mentioned in the article?",["Desertification","Flooding","Disease outbreaks","More tourism"],3],
-["3. Which is a cause mentioned?",["Timber harvesting","Space travel","Tourism","Internet use"],0],
-["4. Throughout history, agriculture is a main reason for deforestation.",["True","False"],0],
-["5. Old forests are usually replaced by fast-growing plants or crops.",["True","False"],0],
-["6. Subsistence farming is a commercial profit-making venture.",["True","False"],1],
-["7. What is the most appropriate title for paragraphs 6–8?",["Population growth, an important cause of deforestation","The more, the merrier","Why the human race is doomed","A fatal pandemic"],0],
-["8a. How many main factors mentioned contribute to desertification?",["2","3","4","5"],1],
-["8b. How many civilisation collapses are mentioned?",["3","4","5","6"],2],
-["8c. What percentage of the world's land area is drylands?",["20%","30%","40%","50%"],2],
-["8d. At up to what rate is the Sahara expanding south?",["28 km/year","38 km/year","48 km/year","58 km/year"],2],
-["10. Deforestation has significant implications for medical and agricultural industries.",["True","False"],0],
-["11. Modern agriculture is expanding the range of crops it relies on.",["True","False"],1],
-["12. Daily losses amount to more than 100 plant, animal and insect species.",["True","False"],0],
-["13. Deforestation only affects local climatic conditions.",["True","False"],1],
-["14. Deforestation is responsible for over half of global greenhouse gas emissions.",["True","False"],1]
+const reading = [
+["What is the main purpose of the text?",["To explain deforestation and its consequences","To advertise tourism","To describe a school","To teach cooking"],0],
+["Most of the forest loss mentioned occurred in the last...",["10,000 years","500 years","50 years","5 years"],2],
+["Which is a cause of deforestation?",["Timber harvesting","Space travel","Cinema","Online shopping"],0],
+["Deforestation can contribute to soil erosion and desertification.",["True","False"],0],
+["New-growth forests always support exactly the same biodiversity as old forests.",["True","False"],1],
+["Subsistence farming accounts for...",["18%","32%","40%","48%"],3],
+["Commercial agriculture accounts for a further...",["20%","32%","48%","52%"],1],
+["Drylands occupy about what percentage of the world's land area?",["20%","30%","40%","60%"],2],
+["The Sahara is expanding south at up to...",["28 km/year","38 km/year","48 km/year","58 km/year"],2],
+["The world is estimated to lose around how many species every day?",["37","87","137","237"],2],
+["Deforestation affects...",["only local climate","only global climate","both local and global climate","neither"],2],
+["Deforestation is estimated to be directly responsible for around...",["10%","20%","40%","60%"],1]
 ];
-let ra=Array(rq.length).fill(null);
-rquiz.innerHTML=rq.map((q,i)=>'<div class="question"><b>'+q[0]+'</b>'+q[1].map((o,j)=>'<button class="option" onclick="rpick('+i+','+j+',this)">'+String.fromCharCode(65+j)+'. '+o+'</button>').join('')+'</div>').join('');
-function rpick(i,j,b){ra[i]=j;document.querySelectorAll('#rquiz .question')[i].querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add('correct')}
-function gradeReading(){let s=0;rq.forEach((q,i)=>{let bs=document.querySelectorAll('#rquiz .question')[i].querySelectorAll('button');bs.forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('correct');if(ra[i]===j&&j!==q[2])b.classList.add('wrong')});if(ra[i]===q[2])s++});localStorage.setItem('readingScore',s+'/'+rq.length);rresult.innerHTML='<div class="card"><h3>Resultado: '+s+'/'+rq.length+'</h3><p>'+ (s>=13?'🔥 Muy buen nivel para el examen.':s>=10?'👍 Bien. Vamos a atacar los fallos.':'💪 Hay margen de mejora: revisamos cada error y repetimos con otro texto.')+'</p></div>';updateMistakes()}
 
-const grammar=[
+const grammar = [
 ["I _____ English every day.",["study","studies","studied"],0],
-["If governments act now, they _____ reduce the problem.",["can","would","did"],0],
-["The trees _____ down last year.",["were cut","cutting","have cut"],0],
+["She _____ to work yesterday.",["go","went","has gone"],1],
 ["I have lived here _____ 2019.",["since","for","during"],0],
-["There are _____ possible solutions.",["several","much","a little"],0],
-["She is interested _____ environmental issues.",["in","on","at"],0],
+["There are _____ possible solutions.",["much","several","a little"],1],
 ["People should _____ less plastic.",["use","using","used"],0],
-["The problem is becoming _____.",["more and more serious","many and many serious","most seriouser"],0],
-["If I _____ more time, I would study every day.",["had","have","will have"],0],
+["The trees _____ down last year.",["were cut","cut","are cutting"],0],
+["If I _____ more time, I would study more.",["have","had","will have"],1],
+["This problem is becoming _____.",["more serious","most serious","seriousest"],0],
+["She is interested _____ environmental issues.",["in","on","at"],0],
 ["By next year, I _____ English for several years.",["will have studied","study","studied"],0]
 ];
-gquiz.innerHTML=grammar.map((q,i)=>'<div class="question"><b>'+(i+1)+'. '+q[0]+'</b><div>'+q[1].map((o,j)=>'<button type="button" class="goption" data-i="'+i+'" data-j="'+j+'" onclick="pickGrammar(this)">'+o+'</button>').join('')+'</div></div>').join('');
-function pickGrammar(btn){const i=Number(btn.dataset.i);const q=document.querySelectorAll('#gquiz .question')[i];q.querySelectorAll('.goption').forEach(x=>x.classList.remove('correct','wrong'));q.dataset.a=btn.dataset.j;btn.classList.add('correct')}
-function gradeGrammar(){let s=0;document.querySelectorAll('#gquiz .question').forEach((d,i)=>{const a=Number(d.dataset.a);const buttons=d.querySelectorAll('.goption');buttons.forEach((b,j)=>{b.disabled=true;if(j===grammar[i][2])b.classList.add('correct');if(j===a&&j!==grammar[i][2])b.classList.add('wrong')});if(a===grammar[i][2])s++});localStorage.setItem('grammarScore',s+'/'+grammar.length);gresult.innerHTML='<div class="card"><h3>'+s+'/'+grammar.length+'</h3><p>'+ (s>=8?'Muy bien.':'Repasa los fallos y vuelve a intentarlo.')+'</p></div>';updateMistakes()}
 
-const vocab=[
-["deforestation","deforestación"],["biodiversity","biodiversidad"],["soil erosion","erosión del suelo"],["greenhouse gas emissions","emisiones de gases de efecto invernadero"],["habitat","hábitat"],["reforestation","reforestación"],["land management","gestión del territorio"],["depleted soil","suelo empobrecido"],["subsistence farming","agricultura de subsistencia"],["livestock","ganado"],["desertification","desertificación"],["resilience","resiliencia"],["to tackle","abordar"],["to reduce","reducir"],["threat","amenaza"],["reliable","fiable"],["evidence","evidencia"],["however","sin embargo"],["therefore","por lo tanto"],["in addition","además"]
+const vocab = [
+["deforestation","deforestación"],["biodiversity","biodiversidad"],["soil erosion","erosión del suelo"],
+["greenhouse gas emissions","emisiones de gases de efecto invernadero"],["habitat","hábitat"],
+["reforestation","reforestación"],["livestock","ganado"],["desertification","desertificación"],
+["subsistence farming","agricultura de subsistencia"],["threat","amenaza"],
+["evidence","evidencia"],["to tackle","abordar"],["therefore","por lo tanto"],
+["however","sin embargo"],["in addition","además"]
 ];
-vlist.innerHTML=vocab.map((v,i)=>'<div class="question"><b>'+(i+1)+'. '+v[0]+'</b> — '+v[1]+'<br><span class="small">Write one original sentence in English.</span></div>').join('');
 
-const tasks={
-1:"<b>TASK 1 — Environmental challenges in my part of the world</b><p>Explain the environmental pollution and degradation issues in an area of the country you know. Explain the causes of these problems and suggest possible solutions. Develop each issue with causes and solutions.</p>",
-2:"<b>TASK 2 — An introduction to Social Media Use</b><p>Write an informative piece for new social media users. Explain what social media is, platforms, advantages and disadvantages. Explain your personal use and any security problems or threats, with personal examples. Finally, suggest rules or guidelines for users.</p>",
-3:"<b>TASK 3 — Education and lifelong learning</b><p>Write an informative piece explaining why lifelong learning is important today. Discuss benefits, difficulties, examples and practical advice for someone starting to learn a new skill.</p>"
-};
-function setTask(n){taskBox.innerHTML=tasks[n];essay.value='';countWords()}
-setTask(1);
-function countWords(){wc.textContent='Words: '+essay.value.trim().split(/\s+/).filter(Boolean).length}
-function saveEssay(){localStorage.setItem('englishEssay',essay.value);saved.textContent='✓ Writing guardado en este dispositivo.'}
-function startToday(){document.getElementById('pbar').style.width='10%';document.getElementById('ptext').textContent='Sesión iniciada. Empieza por Grammar → Vocabulary → Reading → Writing → errores.'}
-function show(id,b){document.querySelectorAll('main>section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')}
-function timer(id){let end=Date.now()+2700000;setInterval(()=>{let s=Math.max(0,Math.floor((end-Date.now())/1000)),m=Math.floor(s/60),r=s%60;document.getElementById(id).textContent=String(m).padStart(2,'0')+':'+String(r).padStart(2,'0')},1000)}
-timer('rtimer');timer('wtimer');
-function updateMistakes(){mistakeBox.innerHTML='<p><b>Último Reading:</b> '+(localStorage.getItem('readingScore')||'Sin hacer')+'</p><p><b>Último Grammar:</b> '+(localStorage.getItem('grammarScore')||'Sin hacer')+'</p>'}
-function clearData(){localStorage.clear();updateMistakes();saved.textContent='';alert('Datos borrados.')}
-updateMistakes();
+let rAnswers = Array(reading.length).fill(-1);
+let gAnswers = Array(grammar.length).fill(-1);
+
+function renderQuestions(){
+ document.getElementById('readingQuestions').innerHTML = reading.map((q,i)=>
+  `<div class="question"><b>${q[0]}</b><div>${q[1].map((o,j)=>
+  `<button type="button" class="answer" data-q="${i}" data-a="${j}" onclick="selectReading(this)">${String.fromCharCode(65+j)}. ${o}</button>`
+  ).join('')}</div></div>`).join('');
+
+ document.getElementById('grammarQuestions').innerHTML = grammar.map((q,i)=>
+  `<div class="question"><b>${i+1}. ${q[0]}</b><div>${q[1].map((o,j)=>
+  `<button type="button" data-q="${i}" data-a="${j}" onclick="selectGrammar(this)">${o}</button>`
+  ).join('')}</div></div>`).join('');
+
+ document.getElementById('vocabList').innerHTML = vocab.map((v,i)=
+  `<div class="question"><b>${i+1}. ${v[0]}</b> — ${v[1]}<br><span class="small">Write one sentence using this word.</span></div>`).join('');
+}
+function selectReading(btn){
+ const i=Number(btn.dataset.q); rAnswers[i]=Number(btn.dataset.a);
+ document.querySelectorAll('#readingQuestions .question')[i].querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+ btn.classList.add('selected');
+}
+function selectGrammar(btn){
+ const i=Number(btn.dataset.q); gAnswers[i]=Number(btn.dataset.a);
+ document.querySelectorAll('#grammarQuestions .question')[i].querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+ btn.classList.add('selected');
+}
+function gradeReading(){
+ let score=0;
+ document.querySelectorAll('#readingQuestions .question').forEach((q,i)=>{
+  q.querySelectorAll('button').forEach((b,j)=>{
+   b.disabled=true;
+   if(j===reading[i][2]) b.classList.add('correct');
+   if(rAnswers[i]===j && j!==reading[i][2]) b.classList.add('wrong');
+  });
+  if(rAnswers[i]===reading[i][2]) score++;
+ });
+ localStorage.setItem('readingScore',score+'/'+reading.length);
+ document.getElementById('readingResult').innerHTML='<div class="card"><h3>Resultado: '+score+'/'+reading.length+'</h3></div>';
+ updateScores();
+}
+function gradeGrammar(){
+ let score=0;
+ document.querySelectorAll('#grammarQuestions .question').forEach((q,i)=>{
+  q.querySelectorAll('button').forEach((b,j)=>{
+   b.disabled=true;
+   if(j===grammar[i][2]) b.classList.add('correct');
+   if(gAnswers[i]===j && j!==grammar[i][2]) b.classList.add('wrong');
+  });
+  if(gAnswers[i]===grammar[i][2]) score++;
+ });
+ localStorage.setItem('grammarScore',score+'/'+grammar.length);
+ document.getElementById('grammarResult').innerHTML='<div class="card"><h3>Resultado: '+score+'/'+grammar.length+'</h3></div>';
+ updateScores();
+}
+function chooseWriting(n){
+ const tasks=[
+ "Write an informative piece about environmental problems in an area you know. Explain causes and possible solutions. Give examples.",
+ "Write an informative piece for new social media users. Explain advantages, disadvantages, personal use, security problems and useful guidelines."
+ ];
+ document.getElementById('writingTask').innerHTML='<b>Task '+n+'</b><p>'+tasks[n-1]+'</p><p><b>Target: 250–300 words.</b></p>';
+ document.getElementById('essay').value=''; countWords();
+}
+function countWords(){
+ const text=document.getElementById('essay').value.trim();
+ const n=text?text.split(/\s+/).length:0;
+ document.getElementById('wordCount').textContent='Words: '+n;
+}
+function saveWriting(){
+ localStorage.setItem('englishEssay',document.getElementById('essay').value);
+ document.getElementById('saveMessage').textContent=' ✓ Guardado en este dispositivo';
+}
+function openPage(id,btn){
+ document.querySelectorAll('main>section').forEach(s=>s.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('primary'));
+ if(btn)btn.classList.add('primary');
+}
+function updateScores(){
+ document.getElementById('scores').innerHTML=
+ '<p><b>Reading:</b> '+(localStorage.getItem('readingScore')||'sin hacer')+'</p>'+
+ '<p><b>Grammar:</b> '+(localStorage.getItem('grammarScore')||'sin hacer')+'</p>';
+}
+function clearScores(){localStorage.removeItem('readingScore');localStorage.removeItem('grammarScore');updateScores()}
+function startTimer(id){
+ let end=Date.now()+45*60*1000;
+ setInterval(()=>{
+  let sec=Math.max(0,Math.floor((end-Date.now())/1000));
+  let m=Math.floor(sec/60),s=sec%60;
+  document.getElementById(id).textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+ },1000);
+}
+renderQuestions(); chooseWriting(1); updateScores(); startTimer('readTimer'); startTimer('writeTimer');
 </script>
-</body></html>
+</body>
+</html>
